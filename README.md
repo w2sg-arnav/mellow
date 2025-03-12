@@ -89,5 +89,13 @@ With Mellow, we aim to showcase that small audio-language models can engage in r
 
 ## Citation
 ```
-
+@misc{mellow,
+      title={Mellow: a small audio language model for reasoning}, 
+      author={Soham Deshmukh and Satvik Dixit and Rita Singh and Bhiksha Raj},
+      year={2025},
+      eprint={2503.08540},
+      archivePrefix={arXiv},
+      primaryClass={cs.SD},
+      url={https://arxiv.org/abs/2503.08540}, 
+}
 ```
