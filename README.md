@@ -1,5 +1,5 @@
 # Mellow: a small audio language model for reasoning
-[[`Paper`](https://arxiv.org/abs/2503.08540)] [[`GitHub`](https://github.com/soham97/Mellow)] [[`Checkpoint`](https://huggingface.co/soham97/Mellow)] [[`Zenodo`](https://zenodo.org/records/15002886)]
+[[`Paper`](https://arxiv.org/abs/2503.08540)] [[`GitHub`](https://github.com/soham97/Mellow)] [[`Checkpoint`](https://huggingface.co/soham97/Mellow)] [[`Zenodo`](https://zenodo.org/records/15002886)] [[`Demo`]](https://tinyurl.com/mellowredirect)
 
 Mellow is a small Audio-Language Model that takes in two audios and a text prompt as input and produces free-form text as output. It is a 167M parameter model and trained on ~155 hours of audio (AudioCaps and Clotho), and achieves SoTA performance on different tasks with 50x fewer parameters. 
 
