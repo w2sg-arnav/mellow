@@ -1,5 +1,5 @@
 # Mellow: a small audio language model for reasoning
-[[`Paper`](https://arxiv.org/abs/2503.08540)] [[`GitHub`](https://github.com/soham97/Mellow)] [[`Checkpoint`](https://huggingface.co/soham97/Mellow)] [[`Zenodo`](https://zenodo.org/records/15002886)] [[`Demo`](https://tinyurl.com/mellowredirect)]
+[[`Paper`](https://arxiv.org/abs/2503.08540)] [[`GitHub`](https://github.com/soham97/Mellow)] [[`Checkpoint`](https://huggingface.co/soham97/Mellow)] [[`Zenodo`](https://zenodo.org/records/15036628)] [[`Demo`](https://tinyurl.com/mellowredirect)]
 
 Mellow is a small Audio-Language Model that takes in two audios and a text prompt as input and produces free-form text as output. It is a 167M parameter model and trained on ~155 hours of audio (AudioCaps and Clotho), and achieves SoTA performance on different tasks with 50x fewer parameters. 
 
@@ -51,7 +51,7 @@ device = 0 if cuda else "cpu"
 
 # setup mellow
 mellow = MellowWrapper(
-                    config="v0",
+                    config = "v0",
                     model = "v0",
                     device=device,
                     use_cuda=cuda,
@@ -81,8 +81,36 @@ print(f"\noutput: {response}")
 The composition of the ReasonAQA dataset is shown in Table. The training set is restricted to AudioCaps and Clotho audio files and the testing is performed on 6 tasks - Audio Entailment, Audio Difference, ClothoAQA, Clotho MCQ, Clotho Detail, AudioCaps MCQ and AudioCaps Detail.
 
 ![alt text](resource/data.png)
-- The ReasonAQA JSONs can be downloaded from: [Zenodo](https://zenodo.org/records/15002886)
+- The ReasonAQA JSONs can be downloaded from: [Zenodo](https://zenodo.org/records/15036628). The zip file contain three files including train.json, val.json and test.json
 - The audio files can be downloaded from their respective hosting website: [Clotho](https://zenodo.org/records/4783391) and [AudioCaps](https://github.com/cdjkim/audiocaps)
+
+---
+The format of the dataset is a JSON file of a list of dicts, in the following format:
+
+```json
+[
+ {
+        "taskname": "audiocaps",
+        "filepath1": "AudioCapsLarger/test/Y6BJ455B1aAs.wav",
+        "filepath2": "AudioCapsLarger/test/YZsf2YvJfCKw.wav",
+        "caption1": "A rocket flies by followed by a loud explosion and fire crackling as a truck engine runs idle",
+        "caption2": "Water trickling followed by a toilet flushing then liquid draining through a pipe",
+        "input": "explain the difference in few words",
+        "answer": "Audio 1 features a sudden, intense sonic event (rocket explosion) with high-frequency crackling (fire) and a steady, low-frequency hum (truck engine), whereas Audio 2 consists of gentle, mid-frequency water sounds (trickling, flushing, and draining).",
+        "subtype": "ACD-1.json"
+    },
+  ...
+]
+```
+The field of the JSON dict are:
+- `taskname`: indicates the dataset. The two options are "audiocaps" or "clothov21"
+- `filepath1`: the first audio file path
+- `filepath2`: the second audio file path. This is empty for all tasks except for the audio difference explanation task
+- `caption1`: the ground truth caption for the first audio
+- `caption2`: the ground truth caption for the second audio. This is empty for all tasks except for the audio difference explanation task
+- `input`: the input question or prompt to the model
+- `answer`: the answer or response for the given input
+- `subtype`: the type of question or prompt. The type matches the first column in the reasonaqa image above. The options are - "ACD-1.json", "CLE.json", "AudioCaps.json", and more. 
 
 ## Limitation
 With Mellow, we aim to showcase that small audio-language models can engage in reasoning. As a research prototype, Mellow has not been trained at scale on publicly available audio datasets, resulting in a limited understanding of audio concepts. Therefore, we advise caution when considering its use in production settings. Ultimately, we hope this work inspires researchers to explore small audio-language models for multitask capabilities, complementing ongoing research on general-purpose audio assistants.
