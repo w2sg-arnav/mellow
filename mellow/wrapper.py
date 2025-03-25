@@ -173,7 +173,7 @@ class MellowWrapper():
             audio_tensor = self.load_audio_into_tensor(
                 audio_file, self.args.data["segment_seconds"], resample)
             audio_tensor = audio_tensor.reshape(
-                1, -1).cuda() if self.use_cuda and torch.cuda.is_available() else audio_tensor.reshape(1, -1)
+                1, -1).to(f"cuda:{self.device}") if self.use_cuda and torch.cuda.is_available() else audio_tensor.reshape(1, -1)
             audio_tensors.append(audio_tensor)
         return self.default_collate(audio_tensors)
 
@@ -189,7 +189,7 @@ class MellowWrapper():
                         pad_to_max_length=True, return_tensors="pt")
                 
             for key in tok.keys():
-                tok[key] = tok[key].reshape(-1).cuda() if self.use_cuda and torch.cuda.is_available() else tok[key].reshape(-1)
+                tok[key] = tok[key].reshape(-1).to(f"cuda:{self.device}") if self.use_cuda and torch.cuda.is_available() else tok[key].reshape(-1)
             tokenized_texts.append(tok)
         return self.default_collate(tokenized_texts)
 
