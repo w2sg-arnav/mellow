@@ -29,6 +29,7 @@ class MellowWrapper():
     model_repo = "soham97/mellow"
     model_name = {
         'v0': 'v0.ckpt',
+        'v0_s': 'v0_s.ckpt'
     }
 
     def __init__(self, config, model, device, use_cuda=True):

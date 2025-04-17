@@ -30,7 +30,7 @@ python example.py
 ## Usage
 The MellowWrapper class allows easy interaction with the model. To use the wrapper, inputs required are:
 - `config`: The option supported is "v0"
-- `model`: The option supported is "v0"
+- `model`: The option supported is "v0" and "v0_s". The "v0_s" is trained on more audios i.e. scaled version of "v0"
 - `examples`: List of examples. Each example is a list containing three entries: audiopath1, audiopath2, prompt
 
 Supported functions:
